@@ -40,6 +40,8 @@ SqlHelper.EnsureDatabaseExists(connection);
 
 var endpointInstance = await Endpoint.Start(endpointConfiguration);
 
+container.Verify();
+
 await endpointInstance.SendLocal(new MyMessage());
 
 Console.WriteLine("Press any key to exit");
