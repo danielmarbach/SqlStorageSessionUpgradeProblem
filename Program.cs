@@ -13,7 +13,6 @@ var container = new Container();
 container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
 container.Options.AllowOverridingRegistrations = true;
 container.Options.AutoWirePropertiesImplicitly();
-container.Register<MyRepository>(Lifestyle.Scoped);
 
 var endpointConfiguration = new EndpointConfiguration("SqlUpgradeRepro");
 endpointConfiguration.EnableInstallers();
@@ -41,8 +40,6 @@ SqlHelper.EnsureDatabaseExists(connection);
 var endpointInstance = await Endpoint.Start(endpointConfiguration);
 
 container.Verify();
-
-await endpointInstance.SendLocal(new MyMessage());
 
 Console.WriteLine("Press any key to exit");
 Console.ReadKey();
