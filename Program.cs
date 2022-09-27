@@ -18,12 +18,8 @@ container.Register<MyRepository>(Lifestyle.Scoped);
 var endpointConfiguration = new EndpointConfiguration("SqlUpgradeRepro");
 endpointConfiguration.EnableInstallers();
 
-// var transport = endpointConfiguration.UseTransport<LearningTransport>();
-// transport.StorageDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ".learningtransport"));
-
-var transport = endpointConfiguration.UseTransport<RabbitMQTransport>();
-transport.ConnectionString("host=localhost");
-transport.UseConventionalRoutingTopology(QueueType.Quorum);
+var transport = endpointConfiguration.UseTransport<LearningTransport>();
+transport.StorageDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ".learningtransport"));
 
 var persistence = endpointConfiguration.UsePersistence<SqlPersistence>();
 var connection = @"Server=localhost,1433;Initial Catalog=SqlUpgradeRepro;User Id=sa;Password=yourStrong(!)Password;encrypt=false";
